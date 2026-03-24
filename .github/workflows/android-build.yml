@@ -52,11 +52,17 @@ jobs:
       - name: Make Gradle wrapper executable
         run: chmod +x gradlew
 
-      - name: Build debug APK
-        run: ./gradlew assembleDebug --no-daemon
+      - name: Build APKs
+        run: ./gradlew assembleDebug assembleRelease --no-daemon
 
       - name: Upload debug APK
         uses: actions/upload-artifact@v4
         with:
           name: tunproxy-debug-apk
           path: android_app/app/build/outputs/apk/debug/*.apk
+
+      - name: Upload release APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: tunproxy-release-apk
+          path: android_app/app/build/outputs/apk/release/*.apk
